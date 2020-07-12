@@ -1,0 +1,1 @@
+Hocam Ben tüm sıralamalarda linkedlist yapısını implemente edeceğiz Diye anladım vee ona göre yaptım.
