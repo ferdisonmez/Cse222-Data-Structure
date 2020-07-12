@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"DequeWrite.DequeIterator"},{"p":"<Unnamed>","l":"DequeWrite.DequeIteratorReverse"},{"p":"<Unnamed>","l":"DequeWrite"},{"p":"<Unnamed>","l":"LinkListWrite"},{"p":"<Unnamed>","l":"LinkListWrite.LinkListWriteIterator"},{"p":"<Unnamed>","l":"Main"}]
