@@ -1,0 +1,163 @@
+import java.util.List;
+public class MyArrayList<E> implements MyListinterface<E>,Value{
+    //data fields
+    private E[] theData; // underlying data array
+    private int size = 0; // current size
+    private int capacity = 0; // the current capacity
+
+    //methods
+    /**
+     * Constructor of the ArrayList<E>
+     */
+    @SuppressWarnings("unchecked") // suppress the unchecked warning resulting from E being unknown
+    public MyArrayList()
+    {
+        capacity = MAX_NUMBER; //start size at 10
+        theData = (E[]) new Object[capacity]; //correct way to create an array of E objects
+        //theData = new E[capacity] would be incorrect due to unspecified array type
+    }
+
+    /**
+     * A method to construct a MyArrayList with a given initial capacity
+     * @param initCapacity
+     */
+    @SuppressWarnings("unchecked")
+    public MyArrayList(int initCapacity)
+    {
+        if(initCapacity <= 0) // if the starting capacity is less than or equal to 0, throw an exception
+            throw new IllegalArgumentException("Not a valid starting capacity"); //if 0, the capacity cannot increase with reallocation
+        capacity = initCapacity; //start size at given amount
+        theData = (E[]) new Object[capacity];
+    }
+
+    /**
+     * A method to add an entry to the end of the list
+     * O(n) = O(1) no shifting of items
+     * @param anEntry The entry to add
+     * @return Statement on whether the addition was successful; always true
+     */
+    public boolean add(E anEntry)
+    {
+        if(size == capacity) // if the array is full
+            return false;
+
+        theData[size] = anEntry; //add the element at the end of the list
+        size++; //adjust the size
+        return true; // successful adding
+    }
+
+    /**
+     * A method to add an entry at a given index
+     *
+     * O(n) = O(n) (shifting of items)
+     * @param index The desired index of the item
+     * @param anEntry The item to add
+     */
+    public boolean add(int index, E anEntry)
+    {
+        if(index < 0 || index > size) // if we have an invalid index (index at size is good; note that here)
+            throw new ArrayIndexOutOfBoundsException(index); // throw an error report to the user
+
+        if(size == capacity) // if the array is full
+            return false;
+
+        for(int i = size; i > index; i--) // for each item after the given index
+            theData[i] = theData[i - 1]; //shift the item
+
+        theData[index] = anEntry; //place the new item
+        size++; // adjust size
+        return true;
+    }
+
+    /**
+     * A method to get an item from a given index
+     *
+     * O(n) = O(1) (contains no loops; few code)
+     * @param index The index to get the item from
+     * @return The item at the given index
+     */
+    public E get(int index)
+    {
+        if(index < 0 || index >= size) // if the index is invalid (less than zero or out of bounds)
+            throw new ArrayIndexOutOfBoundsException(index); //throw an exception to the user
+
+        return theData[index]; //get the item at the given index
+    }
+
+    /**
+     * A method to insert a new item at a given index, and return the old value
+     *
+     * O(n) = O(1) (no loops and few lines)
+     * @param index The index to add the new item at
+     * @param newValue The new item to add
+     * @return The old value at the given index
+     */
+    public E set(int index, E newValue)
+    {
+        if(index < 0 || index >= size) //if we have an invalid index
+            throw new ArrayIndexOutOfBoundsException(index); // throw an exception to the user
+
+        E oldValue = theData[index]; //get the old data
+        theData[index] = newValue; //set the new data to the old index
+        return oldValue; // return the previous data
+    }
+
+    /**
+     * A method to remove an item; shifting the items that follow forward
+     *
+     * O(n) = O(n) (shifting items)
+     * @param index The index to remove
+     * @return The item removed
+     */
+    public E remove(int index)
+    {
+        if(index < 0 || index >= size) //if there is an invalid index
+            throw new ArrayIndexOutOfBoundsException(index); // throw an exception
+
+        E returnValue = theData[index]; //get the item to remove
+
+        for(int i = index + 1; i < size; i++) // for each item after the index
+            theData[i - 1] = theData[i]; // shift the item forward
+
+        size--; //decrease the size
+        return returnValue; // return the removed item
+    }
+
+    /**
+     * A method to find the first index of a target
+     *
+     * O(n) = O(n) (loop through each item)
+     * @param target The target to look for
+     * @return The index of the target; -1 if the target is not in the list
+     */
+    public int indexOf(E target)
+    {
+        for(int i = 0; i < size; i++)
+        {
+            if(target.equals(theData[i]))
+                return i; //return the index of the first occurence
+        }
+        return -1; // we did not find the target
+    }
+
+    /**
+     * A method to get the size of the MyArrayList
+     * O(n) = O(1) (just returning a variable)
+     * @return The size of the list
+     */
+    public int size()
+    {
+        return size;
+    }
+
+    public void Show(){
+        if (theData.length ==0) {
+            System.out.println("Not İnclude Element");
+        }
+        else {
+            for (int i = 0; i <size; i++) {
+                System.out.println(theData[i]);
+            }
+        }
+    }
+}
